@@ -1,4 +1,5 @@
 <form #itemForm = "ngForm" (ngSubmit)="onSubmit(itemForm)">
+  <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="itemService.selectedItem.$key">
   <div class="form-group">
     <label>Name</label>
     <input class="form-control" name="name" #name="ngModel" [(ngModel)]="itemService.selectedItem.name" placeholder="Item name" required>

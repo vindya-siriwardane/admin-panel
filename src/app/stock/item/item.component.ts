@@ -14,12 +14,15 @@ export class ItemComponent implements OnInit {
   constructor(private itemService : ItemService, private toastrService : ToastrService) { }
 
   ngOnInit() {
-    this.itemService.getData();
+    // this.itemService.getData();
     this.resetForm();
   }
 
   onSubmit(itemForm : NgForm){
+    if(itemForm.value.$key == null)
     this.itemService.insertItem(itemForm.value);
+    else
+    this.itemService.updateItem(itemForm.value);
     this.resetForm(itemForm);
     // this.tostr.success('Added successfully', 'Item');
   }
