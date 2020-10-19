@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ItemService } from '../shared/item.service';
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-item',
@@ -10,7 +10,8 @@ import { ItemService } from '../shared/item.service';
 })
 export class ItemComponent implements OnInit {
 
-  constructor(private itemService : ItemService) { }
+  title = 'Alert Success'
+  constructor(private itemService : ItemService, private toastrService : ToastrService) { }
 
   ngOnInit() {
     this.itemService.getData();
@@ -33,5 +34,9 @@ export class ItemComponent implements OnInit {
       price: 0,
     }
 
+  }
+
+  alert(){
+    this.toastrService.success('Success !!', 'title');
   }
 }

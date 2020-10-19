@@ -8,7 +8,8 @@ import { environment } from '../environments/environment';
 import { StockComponent } from './stock/stock.component';
 import { ItemComponent } from './stock/item/item.component';
 import { StockListComponent } from './stock/stock-list/stock-list.component';
-// import { ToastrModule } from 'ngx-toastr';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { StockListComponent } from './stock/stock-list/stock-list.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule,
-    // ToastrModule.forRoot()
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
