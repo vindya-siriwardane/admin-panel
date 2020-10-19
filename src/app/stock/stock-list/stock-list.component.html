@@ -1,9 +1,15 @@
 <h6 class="text-center">Available Stock</h6><br>
 <table class="table table-sm table-hover">
+  <tr>
+    <th>Name</th>
+    <th>Qty.</th>
+    <th>Price Rs.</th>
+    <th></th>
+  </tr>
   <tr *ngFor="let item of itemList">
     <td>{{item.name}}</td>
     <td>{{item.quantity}}</td>
-    <td>{{item.price}}</td>
+    <td>{{item.price | number:'1.2-2'}}</td>
     <td>
       <a class="btn" (click)="onEdit(item)">
         <i class="fa fa-pencil-square-o"></i>

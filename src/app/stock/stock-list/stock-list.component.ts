@@ -31,6 +31,7 @@ export class StockListComponent implements OnInit {
   onDelete(key : string){
     if (confirm('Are you sure to delete this record ?') == true) {
     this.itemService.deleteItem(key);
+    alert('Deleted successfully.');
   }
 }
 }

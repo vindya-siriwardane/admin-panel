@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 import { StockComponent } from './stock/stock.component';
 import { ItemComponent } from './stock/item/item.component';
 import { StockListComponent } from './stock/stock-list/stock-list.component';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -23,7 +24,8 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    // BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
