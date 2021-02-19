@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  firebaseConfig :{
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  firebaseConfig : {
     apiKey: "AIzaSyAZLKzqY-NAkTqJ7O7XQJfUNcrCTopnfcw",
     authDomain: "shopping-cart-a24ec.firebaseapp.com",
     databaseURL: "https://shopping-cart-a24ec.firebaseio.com",

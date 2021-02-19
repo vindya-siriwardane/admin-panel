@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemService } from 'src/app/shared/item.service';
 import { NgForm } from '@angular/forms';
-import { ItemService } from '../shared/item.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -9,47 +10,37 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
-  public name : String="";
-  public quantity : Number;
-  public price : Number;
 
-  // title = 'Alert Success'
-  constructor(private itemService : ItemService, private toastrService : ToastrService) { }
+  constructor(public itemService : ItemService, 
+    private firestore : AngularFirestore,
+    private toastr : ToastrService ) { }
 
-  ngOnInit() {
-    // this.itemService.getData();
+  ngOnInit(){
     this.resetForm();
   }
 
   onSubmit(itemForm : NgForm){
-    if(itemForm.value.name.trim().length<=0 || itemForm.value.quantity<=0 || itemForm.value.quantity==null ||itemForm.value.price<=0 || itemForm.value.price==null){
-      alert('Fillout all the fields !');
-    }
-    else{
-      if(itemForm.value.$key == null)
-      this.itemService.insertItem(itemForm.value);
-      else
-      this.itemService.updateItem(itemForm.value);
+    let data = Object.assign({},itemForm.value) ;
+    delete data.id;
+    if(itemForm.value.id == null)
+      this.firestore.collection('items').add(data);
+    else
+    this.firestore.doc('items/' + itemForm.value.id).update(data);  
       this.resetForm(itemForm);
-
-    }
+      this.toastr.success('Successfully submitted ! ','Item Register');
     
-    // this.tostr.success('Added successfully', 'Item');
   }
+
 
   resetForm(itemForm? : NgForm){
     if (itemForm != null)
       itemForm.reset();
-    this.itemService.selectedItem = {
-      $key: null,
+    this.itemService.formData = {
+      id: null,
       name: '',
       quantity: 0,
       price: 0,
     }
 
   }
-
-  // alert(){
-  //   this.toastrService.success('Success !!', 'title');
-  // }
 }

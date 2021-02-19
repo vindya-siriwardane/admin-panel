@@ -6,3 +6,10 @@ input.ng-invalid.ng-dirty{
 button:hover,a.btn:hover{
     cursor: pointer;
    }
+
+div.validation-error{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: red;
+}

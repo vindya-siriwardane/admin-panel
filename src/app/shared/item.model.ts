@@ -1,5 +1,6 @@
+
 export class Item {
-    $key : string;
+    id : string;
     name : string;
     quantity : number;
     price : number;
