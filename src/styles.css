@@ -7,6 +7,10 @@ button:hover,a.btn:hover{
     cursor: pointer;
    }
 
+table.table-hover tbody tr:hover{
+    cursor: pointer;
+}   
+
 div.validation-error{
     width: 100%;
     margin-top: .25rem;

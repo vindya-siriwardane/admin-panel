@@ -1,32 +1,46 @@
 <form #itemForm = "ngForm" (submit)="onSubmit(itemForm)" >
     <input type="hidden" name="id" #id="ngModel" [(ngModel)]="itemService.formData.id">
     <div class="form-group">
+      <label>Code</label>
+      <input class="form-control" onkeyup="this.value = this.value.toUpperCase();" (keyup.enter)="getCategory(itemService.formData.code)"name="code" #code="ngModel" [(ngModel)]="itemService.formData.code" placeholder="Item code" required>
+      <div *ngIf ="code.invalid && code.touched" class="validation-error">This field is required.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Category</label>
+      <input class="form-control" name="category" #category="ngModel" [(ngModel)]="itemService.formData.category" disabled>
+      <!-- <div *ngIf ="category.invalid && category.touched" class="validation-error">This field is required.</div> -->
+    </div>
+
+    <div class="form-group">
       <label>Name</label>
-      <input class="form-control" name="name" #name="ngModel" [(ngModel)]="itemService.formData.name" placeholder="Item name" required>
+      <input class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="itemService.formData.name" placeholder="Item name" required>
       <div *ngIf ="name.invalid && name.touched" class="validation-error">This field is required.</div>
     </div>
+
     <div class="form-group">
       <label>Quantity</label>
       <input class="form-control" name="quantity" #quantity="ngModel" [(ngModel)]="itemService.formData.quantity" placeholder="Quantity" required>
       <div *ngIf ="quantity.invalid && quantity.touched" class="validation-error">This field is required.</div>
     </div>
+
     <div class="form-group">
       <label>Price</label>
       <input class="form-control" name="price" #price="ngModel" [(ngModel)]="itemService.formData.price" placeholder="Rs." required>
       <div *ngIf ="price.invalid && price.touched" class="validation-error">This field is required.</div>
     </div>
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <button class="btn btn-default" type="submit" [disabled]="itemForm.invalid">
               <i class="fa fa-plus"></i>   Add</button>
         </div>
+
         <div class="form-group col-md-6">
             <button class="btn btn-default" type="button" (click)="resetForm(itemForm)" >
                 <i class="fa fa-repeat"></i>   Reset</button>
         </div>       
     </div>
-    
-  
-    
+ 
   </form>
   

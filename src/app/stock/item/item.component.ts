@@ -11,36 +11,54 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ItemComponent implements OnInit {
 
-  constructor(public itemService : ItemService, 
-    private firestore : AngularFirestore,
-    private toastr : ToastrService ) { }
+  constructor(public itemService: ItemService,
+    private firestore: AngularFirestore,
+    private toastr: ToastrService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.resetForm();
   }
 
-  onSubmit(itemForm : NgForm){
-    let data = Object.assign({},itemForm.value) ;
+  onSubmit(itemForm: NgForm) {
+    let data = Object.assign({}, itemForm.value);
     delete data.id;
-    if(itemForm.value.id == null)
+    if (itemForm.value.id == null)
       this.firestore.collection('items').add(data);
     else
-    this.firestore.doc('items/' + itemForm.value.id).update(data);  
-      this.resetForm(itemForm);
-      this.toastr.success('Successfully submitted ! ','Item Register');
-    
+      this.firestore.doc('items/' + itemForm.value.id).update(data);
+    this.resetForm(itemForm);
+    this.toastr.success('Successfully added to the stock ! ', 'Stock Update');
+
   }
 
 
-  resetForm(itemForm? : NgForm){
+  resetForm(itemForm?: NgForm) {
     if (itemForm != null)
       itemForm.reset();
     this.itemService.formData = {
       id: null,
+      code: '',
+      category: '',
       name: '',
       quantity: 0,
       price: 0,
     }
+
+  }
+
+  getCategory(code) {
+    if (!code) {
+      console.log("nothing here");
+
+    }
+    else{
+      
+      console.log(code);
+      var itemName = (<HTMLInputElement>document.getElementById("name"))
+      itemName.focus();
+    }
+
+
 
   }
 }
