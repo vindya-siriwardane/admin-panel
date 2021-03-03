@@ -1,15 +1,28 @@
 <form #itemForm = "ngForm" (submit)="onSubmit(itemForm)" >
     <input type="hidden" name="id" #id="ngModel" [(ngModel)]="itemService.formData.id">
-    <div class="form-group">
-      <label>Code</label>
-      <input class="form-control" onkeyup="this.value = this.value.toUpperCase();" (keyup.enter)="getCategory(itemService.formData.code)"name="code" #code="ngModel" [(ngModel)]="itemService.formData.code" placeholder="Item code" required>
-      <div *ngIf ="code.invalid && code.touched" class="validation-error">This field is required.</div>
+    
+    <div class="form-group ">
+          <label>Category </label>
+          <select class="form-control" (change)="onOtherCategory($event)"[(ngModel)]="itemService.formData.category" name="category" #category ='ngModel' ngDefaultControlstyle="align-content: center;text-align:center">
+            <option style="align-content: right;text-align: right;" *ngFor="let item of itemList">
+              {{item.category}}   
+            </option>
+            <option >
+              Other
+            </option>            
+          </select>
+    </div>
+
+    <div class="form-group" >   
+        <label id="otherCategoryIdLabel" style="display : none; padding-left: 50px;" > Add new category</label>
+        <input type="text" style="display : none; padding-left: 50px;" class="form-control" id="otherCategoryId" [(ngModel)]="itemService.formData.otherCategory" #otherCategory="ngModel" name="otherCategory">
+        <!-- <div *ngIf ="otherCategory.touched" class="validation-error">This field is required.</div> -->
     </div>
 
     <div class="form-group">
-      <label>Category</label>
-      <input class="form-control" name="category" #category="ngModel" [(ngModel)]="itemService.formData.category" disabled>
-      <!-- <div *ngIf ="category.invalid && category.touched" class="validation-error">This field is required.</div> -->
+      <label>Code</label>
+      <input class="form-control" id="code" name="code" #code="ngModel" onkeyup="this.value = this.value.toUpperCase();" [(ngModel)]="itemService.formData.code" required >
+      <div *ngIf ="code.invalid && code.touched" class="validation-error">This field is required.</div>
     </div>
 
     <div class="form-group">
@@ -20,13 +33,13 @@
 
     <div class="form-group">
       <label>Quantity</label>
-      <input class="form-control" name="quantity" #quantity="ngModel" [(ngModel)]="itemService.formData.quantity" placeholder="Quantity" required>
+      <input class="form-control" type="number" name="quantity" #quantity="ngModel" [(ngModel)]="itemService.formData.quantity" placeholder="Quantity" required>
       <div *ngIf ="quantity.invalid && quantity.touched" class="validation-error">This field is required.</div>
     </div>
 
     <div class="form-group">
-      <label>Price</label>
-      <input class="form-control" name="price" #price="ngModel" [(ngModel)]="itemService.formData.price" placeholder="Rs." required>
+      <label>Unit Price (Rs.)</label>
+      <input class="form-control" type="number" name="price" #price="ngModel" [(ngModel)]="itemService.formData.price" placeholder="Rs." required>
       <div *ngIf ="price.invalid && price.touched" class="validation-error">This field is required.</div>
     </div>
 
