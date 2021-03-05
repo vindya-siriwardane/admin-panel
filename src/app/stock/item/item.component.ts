@@ -14,6 +14,7 @@ export class ItemComponent implements OnInit {
 
   itemList: Item[];
   public itemList1: string[];
+  public tempData: any[] = [];
 
   public code: string;
   public count: number;
@@ -42,27 +43,35 @@ export class ItemComponent implements OnInit {
           ...item.payload.doc.data() as Item
         };
       })
-      console.log("item list ",this.itemList)
+      console.log("item list ", this.itemList)
+
+      for (let i = 0; i < this.itemList.length; i++) {
+        let name = this.itemList[i].category;
+        let aext = this.tempData.find((dataX) => dataX.category === name)
+        if (aext == undefined) {
+          let data = {
+            "category": this.itemList[i].category
+          }
+          this.tempData.push(data);
+        } else { }
+      }
       itemList1[0] = this.itemList[0].category;
       for (this.count = 1; this.count < this.itemList.length; this.count++) {
         categoryCheck = this.itemList[this.count].category;
         for (count2 = 0; count2 < itemList1.length; count2++) {
           if (itemList1[count2] == categoryCheck) {
             categoryBool = true;
-            break;
-          }
+          } else { }
         }
         if (categoryBool == false) {
           itemList1[count3] = categoryCheck;
           count3++;
-        }
+        } else { }
         this.bool = false;
-
       }
     });
-
-    this.itemList1 = itemList1;
-
+    this.itemList1=[];
+    this.itemList1 = this.tempData;
   }
 
 

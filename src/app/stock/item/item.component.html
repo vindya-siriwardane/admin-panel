@@ -5,7 +5,7 @@
           <label>Category </label>
           <select class="form-control" (change)="onOtherCategory($event)"[(ngModel)]="itemService.formData.category" name="category" #category ='ngModel' ngDefaultControlstyle="align-content: center;text-align:center">
             <option style="align-content: right;text-align: right;" *ngFor="let item of itemList1">
-              {{item}}   
+              {{item.category}}   
             </option>
             <option >
               OTHER
