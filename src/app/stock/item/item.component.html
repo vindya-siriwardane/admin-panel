@@ -4,30 +4,30 @@
     <div class="form-group ">
           <label>Category </label>
           <select class="form-control" (change)="onOtherCategory($event)"[(ngModel)]="itemService.formData.category" name="category" #category ='ngModel' ngDefaultControlstyle="align-content: center;text-align:center">
-            <option style="align-content: right;text-align: right;" *ngFor="let item of itemList">
-              {{item.category}}   
+            <option style="align-content: right;text-align: right;" *ngFor="let item of itemList1">
+              {{item}}   
             </option>
             <option >
-              Other
+              OTHER
             </option>            
           </select>
     </div>
 
     <div class="form-group" >   
         <label id="otherCategoryIdLabel" style="display : none; padding-left: 50px;" > Add new category</label>
-        <input type="text" style="display : none; padding-left: 50px;" class="form-control" id="otherCategoryId" [(ngModel)]="itemService.formData.otherCategory" #otherCategory="ngModel" name="otherCategory">
+        <input type="text" style="display : none; padding-left: 50px;" class="form-control" id="otherCategoryId" [(ngModel)]="itemService.formData.otherCategory" #otherCategory="ngModel" name="otherCategory" onkeyup="this.value = this.value.toUpperCase();">
         <!-- <div *ngIf ="otherCategory.touched" class="validation-error">This field is required.</div> -->
     </div>
 
     <div class="form-group">
       <label>Code</label>
-      <input class="form-control" id="code" name="code" #code="ngModel" onkeyup="this.value = this.value.toUpperCase();" [(ngModel)]="itemService.formData.code" required >
+      <input class="form-control" maxlength="5" id="code" name="code" #code="ngModel" onkeyup="this.value = this.value.toUpperCase();" [(ngModel)]="itemService.formData.code" required >
       <div *ngIf ="code.invalid && code.touched" class="validation-error">This field is required.</div>
     </div>
 
     <div class="form-group">
       <label>Name</label>
-      <input class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="itemService.formData.name" placeholder="Item name" required>
+      <input class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="itemService.formData.name" placeholder="Item name" onkeyup="this.value = this.value.toLowerCase();"required>
       <div *ngIf ="name.invalid && name.touched" class="validation-error">This field is required.</div>
     </div>
 

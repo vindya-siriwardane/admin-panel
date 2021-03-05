@@ -13,28 +13,62 @@ import { Item } from 'src/app/shared/item.model';
 export class ItemComponent implements OnInit {
 
   itemList: Item[];
-  public code : string;
+  public itemList1: string[];
+
+  public code: string;
+  public count: number;
+  public bool: boolean = false;
+  public bool2: boolean = false;
+  public docID: string;
 
   constructor(public itemService: ItemService,
     private firestore: AngularFirestore,
     private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.resetForm();
-    this.itemService.getData().subscribe(actionArray => {
-      this.itemList = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data() as Item
-        };
-      })
 
-    });
+    this.resetForm();
+
+      var itemList1: string[] = [];
+      var categoryCheck: string;
+      var count2: number;
+      var count3: number = 1;
+      var categoryBool: boolean = false;
+  
+      this.itemService.getData().subscribe(actionArray => {
+        this.itemList = actionArray.map(item => {
+          return {
+            id: item.payload.doc.id,
+            ...item.payload.doc.data() as Item
+          };
+        }) 
+        itemList1[0] = this.itemList[0].category;
+        for (this.count = 1; this.count < this.itemList.length; this.count++) {
+          categoryCheck = this.itemList[this.count].category;
+          for (count2 = 0; count2 < itemList1.length; count2++) {
+            if (itemList1[count2]==categoryCheck) {
+              categoryBool = true;
+              break;
+            }
+          }
+          if (categoryBool == false) {
+            itemList1[count3] = categoryCheck;
+            count3++;
+          }
+          this.bool = false;
+  
+        }
+      });   
+
+      this.itemList1=itemList1;
 
   }
 
+
+
+
   onSubmit(itemForm: NgForm) {
-    if (document.getElementById("otherCategoryId").style.display == "flex") { 
+    if (document.getElementById("otherCategoryId").style.display == "flex") {
       let data = Object.assign({}, itemForm.value);
       console.log(data);
       data.category = data.otherCategory;
@@ -45,23 +79,50 @@ export class ItemComponent implements OnInit {
         this.firestore.doc('items/' + itemForm.value.id).update(data);
       this.resetForm(itemForm);
       this.toastr.success('Successfully added to the stock ! ', 'Stock Update');
-    } 
-    else 
-    {
+    }
+    else {
       let data = Object.assign({}, itemForm.value);
       delete data.id;
-      // delete data.code;
+      this.itemService.getData().subscribe(actionArray => {
+        this.itemList = actionArray.map(item => {
+          return {
+            id: item.payload.doc.id,
+            ...item.payload.doc.data() as Item
+          };
+        })
 
-      if (itemForm.value.id == null && itemForm.value.code)
+      });
+
+
+      for (this.count = 0; this.count < this.itemList.length; this.count++) {
+        if (this.itemList[this.count].code == data.code && this.itemList[this.count].category == data.category) {
+          this.firestore.doc('items/' + this.itemList[this.count].id).update(data);
+          this.toastr.success('Successfully updated to the stock ! ', 'Stock Update');
+          this.bool = true;
+          break;
+        }
+
+      }
+      if (this.bool == false) {
         this.firestore.collection('items').add(data);
-      else
-        this.firestore.doc('items/' + itemForm.value.id).update(data);
-      
-        this.resetForm(itemForm);
-      this.toastr.success('Successfully added to the stock ! ', 'Stock Update');
+        this.toastr.success('Successfully added to the stock ! ', 'Stock Update');
+
+
+      }
+
+      // if (itemForm.value.id != null)
+      //   // this.firestore.collection('items').add(data);
+      //   {
+      //   console.log("itemform value : ",itemForm.value.id)
+      //   this.firestore.doc('items/' + itemForm.value.id).update(data);
+      //   this.toastr.success('Successfully updated to the stock ! ', 'Stock Update');
+
+      // }
+
+
+      this.resetForm(itemForm);
+      this.bool = false;
     }
-
-
   }
 
 
@@ -80,18 +141,6 @@ export class ItemComponent implements OnInit {
 
   }
 
-  // getCategory(code) {
-  //   if (!code) {
-  //     console.log("nothing here");
-
-  //   }
-  //   else {
-
-  //     console.log(code);
-  //     var itemName = (<HTMLInputElement>document.getElementById("name"))
-  //     itemName.focus();
-  //   }
-  // }
   onOtherCategory(event: { target: { value: any; }; }) {
     const otherCategory = event.target.value;
 

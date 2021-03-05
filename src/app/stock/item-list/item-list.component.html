@@ -1,8 +1,8 @@
 <h6 class="text-center">Available Stock</h6><br>
 <table class="table table-sm table-hover">
   <tr>
-    <th>Code</th>
     <th>Category</th>
+    <th>Code</th>
     <th>Name</th>
     <th>Qty.</th>
     <th>Unit price (Rs.)</th>
@@ -11,8 +11,8 @@
   </tr>
   <tbody>
   <tr *ngFor="let item of itemList">
-    <td (click)="onEdit(item)" >{{item.code}}</td>
     <td (click)="onEdit(item)" >{{item.category}}</td>
+    <td (click)="onEdit(item)" >{{item.code}}</td>
     <td (click)="onEdit(item)" >{{item.name}}</td>
     <td (click)="onEdit(item)" >{{item.quantity}}</td>
     <td (click)="onEdit(item)" >{{item.price | number:'1.2-2'}}</td>
