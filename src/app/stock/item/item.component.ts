@@ -29,38 +29,39 @@ export class ItemComponent implements OnInit {
 
     this.resetForm();
 
-      var itemList1: string[] = [];
-      var categoryCheck: string;
-      var count2: number;
-      var count3: number = 1;
-      var categoryBool: boolean = false;
-  
-      this.itemService.getData().subscribe(actionArray => {
-        this.itemList = actionArray.map(item => {
-          return {
-            id: item.payload.doc.id,
-            ...item.payload.doc.data() as Item
-          };
-        }) 
-        itemList1[0] = this.itemList[0].category;
-        for (this.count = 1; this.count < this.itemList.length; this.count++) {
-          categoryCheck = this.itemList[this.count].category;
-          for (count2 = 0; count2 < itemList1.length; count2++) {
-            if (itemList1[count2]==categoryCheck) {
-              categoryBool = true;
-              break;
-            }
-          }
-          if (categoryBool == false) {
-            itemList1[count3] = categoryCheck;
-            count3++;
-          }
-          this.bool = false;
-  
-        }
-      });   
+    var itemList1: string[] = [];
+    var categoryCheck: string;
+    var count2: number;
+    var count3: number = 1;
+    var categoryBool: boolean = false;
 
-      this.itemList1=itemList1;
+    this.itemService.getData().subscribe(actionArray => {
+      this.itemList = actionArray.map(item => {
+        return {
+          id: item.payload.doc.id,
+          ...item.payload.doc.data() as Item
+        };
+      })
+      console.log("item list ",this.itemList)
+      itemList1[0] = this.itemList[0].category;
+      for (this.count = 1; this.count < this.itemList.length; this.count++) {
+        categoryCheck = this.itemList[this.count].category;
+        for (count2 = 0; count2 < itemList1.length; count2++) {
+          if (itemList1[count2] == categoryCheck) {
+            categoryBool = true;
+            break;
+          }
+        }
+        if (categoryBool == false) {
+          itemList1[count3] = categoryCheck;
+          count3++;
+        }
+        this.bool = false;
+
+      }
+    });
+
+    this.itemList1 = itemList1;
 
   }
 
@@ -144,7 +145,7 @@ export class ItemComponent implements OnInit {
   onOtherCategory(event: { target: { value: any; }; }) {
     const otherCategory = event.target.value;
 
-    if (otherCategory == "Other") {
+    if (otherCategory == "OTHER") {
       document.getElementById("otherCategoryId").setAttribute("style", "display: flex");
       document.getElementById("otherCategoryIdLabel").setAttribute("style", "display: flex");
 
