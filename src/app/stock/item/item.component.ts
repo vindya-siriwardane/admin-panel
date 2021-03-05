@@ -119,17 +119,6 @@ export class ItemComponent implements OnInit {
 
 
       }
-
-      // if (itemForm.value.id != null)
-      //   // this.firestore.collection('items').add(data);
-      //   {
-      //   console.log("itemform value : ",itemForm.value.id)
-      //   this.firestore.doc('items/' + itemForm.value.id).update(data);
-      //   this.toastr.success('Successfully updated to the stock ! ', 'Stock Update');
-
-      // }
-
-
       this.resetForm(itemForm);
       this.bool = false;
     }
