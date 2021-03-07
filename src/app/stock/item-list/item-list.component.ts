@@ -13,8 +13,7 @@ export class ItemListComponent implements OnInit {
 
   itemList: Item[];
   link: string;
-  // public myAngularxQrCode[]:;
-  public myAngularxQrCode: any[] = [];
+  public myAngularxQrCode: any[] = null;
 
   constructor(private itemService: ItemService, private firestore: AngularFirestore, private toastr: ToastrService) { }
 
@@ -36,54 +35,45 @@ export class ItemListComponent implements OnInit {
 
   }
 
-  downloadQR(item: Item) {
+  generateQR(item: Item) {
 
-    // this.itemService.formData = Object.assign({},item);
-    // console.log("items exp date.. ",item.expDate);
     this.myAngularxQrCode = [item.code, ',', item.name, ',', item.price.toString(), ',', item.quantity.toString(), ',', item.expDate.toString(), ','
       , item.discount.toString(), ',', item.weight];
-    console.log("myAngular ... ", this.myAngularxQrCode);
-    const fileNameToDownload = 'image_qrcode';
-    const base64Img = document.getElementsByClassName('img-responsive')[0]['src'];
-
-    // fetch(base64Img)
-    //   .then(res => res.blob())
-    //   .then((blob) => {
-    //     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-    //       window.navigator.msSaveOrOpenBlob(blob, fileNameToDownload);
-    //     }
-    //     else {
-    //       const url = window.URL.createObjectURL(blob);
-    //       const link = document.createElement('a');
-    //       // const link = base64Img.src;
-    //       link.href = url;
-    //       console.log(url);
-    //       link.download = fileNameToDownload;
-    //       link.click();
-    //     }
-    //   })
-    // var y = document.getElementsByTagName("img")[5];
-    // console.log("y...",y)
-    // this.link = y.src;
-
-    // console.log("QR .. ", this.itemService.formData);
-
   }
 
   qrDownload(parent) {
     const parentElement = parent.el.nativeElement.querySelector("img").src;
     let blobData = this.convertBase64ToBlob(parentElement);
-    if (window.navigator && window.navigator.msSaveOrOpenBlob) { 
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
       window.navigator.msSaveOrOpenBlob(blobData, 'Qrcode');
-    } else { 
+      this.download();
+    } else {
       const blob = new Blob([blobData], { type: "image/png" });
       const url = window.URL.createObjectURL(blob);
-     
+
       const link = document.createElement('a');
       link.href = url;
       link.download = 'Qrcode';
       link.click();
     }
+  }
+  getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL;
+  }
+
+  download() {
+    const qrcode = document.getElementById('qrcode') as HTMLElement;
+    let imageData = this.getBase64Image(qrcode.firstChild.firstChild);
+    const link = document.createElement('a');
+    link.href = imageData;
+    link.download = 'Qrcode';
+    link.click();
   }
 
   private convertBase64ToBlob(Base64Image: any) {
@@ -105,10 +95,3 @@ export class ItemListComponent implements OnInit {
   }
 
 }
-// export class QRCodeComponent {
-//     public myAngularxQrCode: string = null;
-//     constructor () {
-//       // assign a value
-//       this.myAngularxQrCode = 'Your QR code data string';
-//     }
-//   }

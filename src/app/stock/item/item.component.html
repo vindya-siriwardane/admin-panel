@@ -16,7 +16,6 @@
     <div class="form-group" >   
         <label id="otherCategoryIdLabel" style="display : none; padding-left: 50px;" > Add new category</label>
         <input type="text" style="display : none; padding-left: 50px;" class="form-control" id="otherCategoryId" [(ngModel)]="itemService.formData.otherCategory" #otherCategory="ngModel" name="otherCategory" onkeyup="this.value = this.value.toUpperCase();">
-        <!-- <div *ngIf ="otherCategory.touched" class="validation-error">This field is required.</div> -->
     </div>
 
     <div class="form-group">
@@ -75,9 +74,5 @@
     </div>
  
   </form>
-  <!-- <div hidden>
-    <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-
-  </div> -->
-
+  
   
