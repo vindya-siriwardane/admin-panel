@@ -1,8 +1,8 @@
-<h5 class="text-center" style="padding-left: 30%;">Available Stock</h5><br>
+<h5 class="text-center">Available Stock</h5><br>
 <div class="scrollable">
 
-<table class="table table-sm table-hover">
-  <thead><tr> 
+<table class="table table-sm table-hover item-list-tble">
+  <thead class="table-head"><tr> 
     <th>Category</th>
     <th>Code</th>
     <th>Name</th>
@@ -12,14 +12,14 @@
     <th>Unit price (Rs.)</th>
     <th>Discount(%)</th>
     <th>Total (Rs.)</th>
-    <th></th>
-    <th></th>
+    <th>&nbsp;</th>
+    <th>QR Code</th>
   </tr></thead>
   <tbody>
   <tr *ngFor="let item of itemList" (mouseover)="generateQR(item)">
     <td (click)="onEdit(item)" >{{item.category}}</td>
     <td (click)="onEdit(item)" >{{item.code}}</td>
-    <td (click)="onEdit(item)" >{{item.name}}</td>
+    <td (click)="onEdit(item)" class="item-name">{{item.name}}</td>
     <td (click)="onEdit(item)" >{{item.expDate}}</td>
     <td (click)="onEdit(item)" >{{item.weight}}</td>
     <td (click)="onEdit(item)" >{{item.quantity}}</td>
@@ -28,12 +28,13 @@
     <td (click)="onEdit(item)" >{{item.price * item.quantity | number : '1.2-2'}}</td>
     <td>
       <a class="btn" (click)="onDelete(item.id)">
-        <i class="fa fa-trash-o"></i>
+        <!-- <i class="fa fa-trash-o"></i> -->
+        <i class="fa fa-trash" aria-hidden="true"></i>
       </a>
     </td>
     <td>
       <a class="btn" (click)="download()">
-        <i class="fa fa-download"></i>
+        <i class="fa fa-download" aria-hidden="true"></i>
       </a>
     </td>
   </tr>

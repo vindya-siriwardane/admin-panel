@@ -9,8 +9,8 @@ button:hover,a.btn:hover{
 
 .scrollable{
     overflow-y: auto;
-    max-height: 40%;
-    width: 130%;
+    max-height: 70%;
+    width: 100%;
 
 }
 
@@ -29,4 +29,12 @@ div.validation-error{
     margin-top: .25rem;
     font-size: 80%;
     color: red;
+}
+.jumbotron{
+    padding: 0;
+    background-color: #428cff;
+}
+
+tr {
+    background-color: #438cff91;
 }

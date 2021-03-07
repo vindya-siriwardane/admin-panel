@@ -14,6 +14,7 @@ export class ItemListComponent implements OnInit {
   itemList: Item[];
   link: string;
   public myAngularxQrCode: any[] = null;
+  code: string;
 
   constructor(private itemService: ItemService, private firestore: AngularFirestore, private toastr: ToastrService) { }
 
@@ -36,7 +37,7 @@ export class ItemListComponent implements OnInit {
   }
 
   generateQR(item: Item) {
-
+    this.code = item.code;
     this.myAngularxQrCode = [item.code, ',', item.name, ',', item.price.toString(), ',', item.quantity.toString(), ',', item.expDate.toString(), ','
       , item.discount.toString(), ',', item.weight];
   }
@@ -45,7 +46,7 @@ export class ItemListComponent implements OnInit {
     const parentElement = parent.el.nativeElement.querySelector("img").src;
     let blobData = this.convertBase64ToBlob(parentElement);
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-      window.navigator.msSaveOrOpenBlob(blobData, 'Qrcode');
+      window.navigator.msSaveOrOpenBlob(blobData, this.code);
       this.download();
     } else {
       const blob = new Blob([blobData], { type: "image/png" });
@@ -53,7 +54,7 @@ export class ItemListComponent implements OnInit {
 
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'Qrcode';
+      link.download = this.code;
       link.click();
     }
   }
@@ -72,7 +73,7 @@ export class ItemListComponent implements OnInit {
     let imageData = this.getBase64Image(qrcode.firstChild.firstChild);
     const link = document.createElement('a');
     link.href = imageData;
-    link.download = 'Qrcode';
+    link.download = this.code;
     link.click();
   }
 
