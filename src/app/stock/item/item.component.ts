@@ -50,7 +50,7 @@ export class ItemComponent implements OnInit {
           ...item.payload.doc.data() as Item
         };
       })
-      console.log("item list ", this.itemList)
+      // console.log("item list ", this.itemList)
 
       for (let i = 0; i < this.itemList.length; i++) {
         let name = this.itemList[i].category;

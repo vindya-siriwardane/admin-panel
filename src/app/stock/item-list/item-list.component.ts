@@ -38,7 +38,7 @@ export class ItemListComponent implements OnInit {
 
   generateQR(item: Item) {
     this.code = item.code;
-    this.myAngularxQrCode = [item.code, ',', item.name, ',', item.price.toString(), ',', item.quantity.toString(), ',', item.expDate.toString(), ','
+    this.myAngularxQrCode = [item.code, ',', item.name, ',', item.price.toString(), ',', '1', ',', item.expDate.toString(), ','
       , item.discount.toString(), ',', item.weight];
   }
 
