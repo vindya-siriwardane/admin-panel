@@ -7,9 +7,22 @@ button:hover,a.btn:hover{
     cursor: pointer;
    }
 
+.scrollable{
+    overflow-y: auto;
+    max-height: 40%;
+    width: 130%;
+
+}
+
 table.table-hover tbody tr:hover{
     cursor: pointer;
 }   
+
+/* table.table-hover thead th {
+    position: fixed;
+    color: brown;
+    text-align: justify;
+}    */
 
 div.validation-error{
     width: 100%;

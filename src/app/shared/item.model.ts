@@ -5,6 +5,9 @@ export class Item {
     category : string;
     otherCategory : string;
     name : string;
+    expDate : Date;
+    weight : string;
     quantity : number;
+    discount : number;
     price : number;
 }

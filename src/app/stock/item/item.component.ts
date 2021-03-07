@@ -22,11 +22,18 @@ export class ItemComponent implements OnInit {
   public bool2: boolean = false;
   public docID: string;
 
+  // public myAngularxQrCode: string = null;
+
+
   constructor(public itemService: ItemService,
     private firestore: AngularFirestore,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    ) { }
 
   ngOnInit() {
+
+    // this.myAngularxQrCode = 'Your QR code data string';
+
 
     this.resetForm();
 
@@ -134,7 +141,10 @@ export class ItemComponent implements OnInit {
       category: '',
       otherCategory: '',
       name: '',
+      expDate:null,
+      weight:'',
       quantity: 0,
+      discount : 0,
       price: 0,
     }
 
@@ -153,4 +163,13 @@ export class ItemComponent implements OnInit {
       document.getElementById("otherCategoryIdLabel").setAttribute("style", "display: none");
     }
   }
+
+  
 }
+// export class QRCodeComponent {
+//   public myAngularxQrCode: string = null;
+//   constructor () {
+//     // assign a value
+//     this.myAngularxQrCode = 'Your QR code data string';
+//   }
+// }

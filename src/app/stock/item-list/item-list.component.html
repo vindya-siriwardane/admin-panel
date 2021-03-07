@@ -1,27 +1,46 @@
-<h6 class="text-center">Available Stock</h6><br>
+<h5 class="text-center" style="padding-left: 30%;">Available Stock</h5><br>
+<div class="scrollable">
+
 <table class="table table-sm table-hover">
-  <tr>
+  <thead><tr> 
     <th>Category</th>
     <th>Code</th>
     <th>Name</th>
+    <th>Exp.Date</th>
+    <th>Weight</th>
     <th>Qty.</th>
     <th>Unit price (Rs.)</th>
+    <th>Discount(%)</th>
     <th>Total (Rs.)</th>
     <th></th>
-  </tr>
+    <th></th>
+  </tr></thead>
   <tbody>
   <tr *ngFor="let item of itemList">
     <td (click)="onEdit(item)" >{{item.category}}</td>
     <td (click)="onEdit(item)" >{{item.code}}</td>
     <td (click)="onEdit(item)" >{{item.name}}</td>
+    <td (click)="onEdit(item)" >{{item.expDate}}</td>
+    <td (click)="onEdit(item)" >{{item.weight}}</td>
     <td (click)="onEdit(item)" >{{item.quantity}}</td>
     <td (click)="onEdit(item)" >{{item.price | number:'1.2-2'}}</td>
+    <td (click)="onEdit(item)" >{{item.discount | number:'1.2-2'}}</td>
     <td (click)="onEdit(item)" >{{item.price * item.quantity | number : '1.2-2'}}</td>
     <td>
       <a class="btn" (click)="onDelete(item.id)">
         <i class="fa fa-trash-o"></i>
       </a>
     </td>
+    <td>
+      <a  download class="btn" (click)="downloadQR(item)">
+        <i class="fa fa-download"></i>
+      </a>
+    </td>
   </tr>
 </tbody>
 </table>
+</div>
+<div >
+  <qrcode #parent [class]="'img-responsive'" [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+<button (click)="qrDownload(parent)">1</button>
+</div>

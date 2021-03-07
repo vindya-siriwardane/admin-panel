@@ -5,6 +5,8 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { QRCodeModule } from 'angularx-qrcode';
+
 
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -26,6 +28,7 @@ import { ItemService } from './shared/item.service';
     AngularFirestoreModule,
     FormsModule,
     BrowserAnimationsModule,
+    QRCodeModule,
     ToastrModule.forRoot()
 
   ],

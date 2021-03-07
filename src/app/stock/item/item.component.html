@@ -27,8 +27,21 @@
 
     <div class="form-group">
       <label>Name</label>
-      <input class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="itemService.formData.name" placeholder="Item name" onkeyup="this.value = this.value.toLowerCase();"required>
+      <input class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="itemService.formData.name" placeholder="Item name" onkeypress="this.value = this.value.toLowerCase();"required>
       <div *ngIf ="name.invalid && name.touched" class="validation-error">This field is required.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Expire Date</label>
+      <input class="form-control" id="expDate" name="expDate" #expDate="ngModel" [(ngModel)]="itemService.formData.expDate" placeholder="Expire date" required>
+      <div *ngIf ="expDate.invalid && expDate.touched" class="validation-error">This field is required.</div>
+    </div>
+
+
+    <div class="form-group">
+      <label>Weight</label>
+      <input class="form-control" id="weight" name="weight" #weight="ngModel" [(ngModel)]="itemService.formData.weight" placeholder="Item weight"required>
+      <div *ngIf ="weight.invalid && weight.touched" class="validation-error">This field is required.</div>
     </div>
 
     <div class="form-group">
@@ -41,6 +54,12 @@
       <label>Unit Price (Rs.)</label>
       <input class="form-control" type="number" name="price" #price="ngModel" [(ngModel)]="itemService.formData.price" placeholder="Rs." required>
       <div *ngIf ="price.invalid && price.touched" class="validation-error">This field is required.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Discount (%)</label>
+      <input class="form-control" type="number" name="discount" #discount="ngModel" [(ngModel)]="itemService.formData.discount" placeholder="%" required>
+      <div *ngIf ="discount.invalid && discount.touched" class="validation-error">This field is required.</div>
     </div>
 
     <div class="form-row">
@@ -56,4 +75,9 @@
     </div>
  
   </form>
+  <!-- <div hidden>
+    <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+  </div> -->
+
   
